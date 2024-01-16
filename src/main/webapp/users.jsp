@@ -16,6 +16,8 @@
         <td>${user.id}</td>
         <td>${user.name}</td>
         <td>${user.age}</td>
+<a href="/delete"
+
       </tr>
     </c:forEach>
   </table>

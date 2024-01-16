@@ -22,4 +22,15 @@ public class UserDaoImpl implements UserDao{
             return session.createQuery("from User", User.class).list();
         }
     }
+
+    @Override
+    public void removeById(int userId) {
+        try (var session = factory.openSession()){
+            var transaction = session.beginTransaction();
+            var user = session.get(User.class, userId);
+            session.delete(user);
+            transaction.commit();
+
+        }
+    }
 }
