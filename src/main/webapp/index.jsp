@@ -4,10 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-<head>Index</head>
+<head>
+    <title>Index</title>
+</head>
 <body>
-<a href="<%= AppConst.ALL_USER_URL%>"All users</a>
-<a href="<a%"
+<a href="<%= AppConst.ALL_USER_URL%>"All users></br>
+<a href="<%=AppConst.ADD_USER_URL%>"Add user></a>
 
 </body>
 </html>

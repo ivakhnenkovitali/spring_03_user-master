@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,8 +40,23 @@ public class UserController {
        return new ModelAndView(ADD_PAGE, USER_LIST_ATTR, new User());
 
     }
+    @PostMapping(value = SAVE_USER_URL)
     public String save(@ModelAttribute(name = USER_ATTR) User user){
         service.add(user);
+        return "redirect:" + ALL_USER_URL;
     }
+    @GetMapping(value = UPD_USER_URL)
+    public ModelAndView upd(
+            @RequestParam(name = "id") int id,
+            @RequestParam(name = "name")String name,
+            @RequestParam(name = "age") int age) {
+        return new ModelAndView(UPD_PAGE, USER_ATTR, new User (id, name, age));
+        }
 
+
+@PostMapping(value = "/saveUpd")
+    public String saveUpd(@ModelAttribute(name = "user")User user) {
+    service.update(user);
+    return "redirect:" + ALL_USER_URL;
+}
 }

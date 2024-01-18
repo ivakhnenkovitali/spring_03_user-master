@@ -1,0 +1,58 @@
+@Entity
+@Table(name="orderItem")
+class OrderItem{
+    @ManyToOne
+    @JoinColumn(name = "orderId")
+    public Order order;
+}
+
+@Entity
+@Table(name="orders")
+class Order{
+   @OneToMany(cascade=CascadeType.ALL)
+   @JoinColumn(name="orderId")
+   public List<OrderItem> items;
+}
+@Entity
+@Table(name="user")
+class User {
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+public id;
+
+
+   @ManyToMany(cascade=CascadeType.ALL)
+   @JoinTable(name="user_task",
+      joinColumns=@JoinColumns(name="user_id", referenceColumnName="id"),
+      inverseJoinColumns=@JoinColumn(name="task_id", referenceColumnName="id"))
+   public Set<Task> tasks;
+ }
+
+
+@Entity
+@Table(name="task")
+class Task {
+public id;
+
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+public id;
+
+   @ManyToMany(cascade=CascadeType.ALL)
+   @JoinTable(name="user_task",
+      joinColumns=@JoinColumns(name="task_id", referenceColumnName="id"),
+      inverseJoinColumns=@JoinColumn(name="user_id", referenceColumnName="id"))
+   public Set<Task> tasks;
+
+
+
+   public Set<User> users;
+}
+user_task
+user_id   |     task_id
+1         |     2
+1         |      2
+2                3
+2
+
+
